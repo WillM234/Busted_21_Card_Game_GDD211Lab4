@@ -207,8 +207,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4568701743683121458}
   - component: {fileID: 4568701743683121420}
+  - component: {fileID: 1378973814315275776}
   - component: {fileID: 4568701743683121421}
   - component: {fileID: 1129084759715764413}
+  - component: {fileID: 300097120}
   m_Layer: 0
   m_Name: NumberCard
   m_TagString: Untagged
@@ -243,8 +245,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 35.994595, y: 54.020576, z: 0.01}
-  m_Center: {x: -0.001001358, y: -0.018974304, z: 0}
+  m_Size: {x: 9.054727, y: 13.526407, z: 0.01}
+  m_Center: {x: -0.01073885, y: -0.0075540543, z: 0}
+--- !u!65 &1378973814315275776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568701743683121459}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.042898, y: 13.508953, z: 0.3615656}
+  m_Center: {x: -0.0000019073486, y: -0.0000019073486, z: 0.010159969}
 --- !u!114 &4568701743683121421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +292,19 @@ MonoBehaviour:
   CardValue: {fileID: 4568701743587865638}
   CardBodyImage: {fileID: 4568701743887331974}
   CardFaceFrameImage: {fileID: 4568701744338579155}
+--- !u!114 &300097120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568701743683121459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9531b1ddaaf704815aaaffe22871037a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseP_Displacement: 1
 --- !u!1 &4568701743887331972
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +678,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 60}
+  m_SizeDelta: {x: 10, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4568701744933570029
 Canvas:
