@@ -1,91 +1,132 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class TurnManager : MonoBehaviour
-{ 
-    public enum TurnState { StartState, DrawState, ScoreState, TurnEndState, StandState};
-    public TurnState currentState;
+{
+    public enum TurnState { StartState, DrawState, StandingState, BustedState, EndState};
+    public TurnState currentTurnState;
 
-    public StateManager GameM;
+    [Header("GameObjects for Canvases")]
+    public GameObject Player1Screen;
+    public GameObject Player2Screen;
+    public GameObject TurnStartScreen;
+    public GameObject PlayerStandingScreen;
+    public GameObject PlayerBustedScreen;
 
-    [Header("TurnStart Panel Text")]
-    public Text TurnStartText;
+    [Header("Flag Player Decision Bools")]
+    public bool P1_Turn = true;//flag for whose turn it is
+    public bool P1_isStanding = false;//checks if P1 is standing
+    public bool P1_isBusted = false;//Checks if P1 is busted 
+    public bool P2_isStanding = false;// checks if P2 is standing 
+    public bool P2_isBusted = false;//Checks if P2 is busted 
 
-    [Header("Player Canvases")]
-    public GameObject TurnStartPanel;
-    public GameObject Player1;
-    public GameObject Player2;
-    
-
-    [Header("Turn State Tracking")]
-    public GameObject TurnStart;
-
-    [Header("Whose Turn Tracker")]
-    public bool p1Turn;
-
-    [Header("Player Stands Tracking")]
-    public bool Player1Stands = false;
-    public bool Player2Stands = false;
-
-    [Header("Round Tracking")]
-    public int CurrentRound = 1;
-
+    // Start is called before the first frame update
     void Start()
     {
-        currentState = TurnState.StartState;
-        ShowScreen(TurnStart);
-        p1Turn = true;
+        currentTurnState = TurnState.StartState;
+        ShowScreen(TurnStartScreen);
+        Player1Screen.SetActive(true);
     }
+
     // Update is called once per frame
     void Update()
     {
-      if(currentState == TurnState.StartState && !p1Turn)
-        {
-            TurnStartText.text = (GameM.Player2Name + " it is your turn! Hit the button to continue.");
-        }
-      else if(currentState == TurnState.StartState && p1Turn)
-        {
-            TurnStartText.text = (GameM.Player1Name + " it is your turn! Hit the button to continue.");
-        }
-    }
-    private void ShowScreen(GameObject gameobjectToShow)
-    {
-        TurnStart.SetActive(false);
-        Player1.SetActive(false);
-        Player2.SetActive(false);
+        
     }
 
-    public void EnterDraw_State()
+    private void ShowScreen(GameObject gameObjectToShow)
     {
-        currentState = TurnState.DrawState;
-        if(p1Turn)
+        TurnStartScreen.SetActive(false);
+        Player1Screen.SetActive(false);
+        Player2Screen.SetActive(false);
+        PlayerStandingScreen.SetActive(false);
+        PlayerBustedScreen.SetActive(false);
+
+        gameObjectToShow.SetActive(true);
+    }
+
+    public void EnterStartState()
+    {
+        currentTurnState = TurnState.StartState;
+        if(P1_Turn)
         {
-            ShowScreen(Player1);
+            ShowScreen(Player1Screen);
         }
-        else if(!p1Turn)
+        else if(!P1_Turn)
         {
-            ShowScreen(Player2);
+            ShowScreen(Player2Screen);
         }
     }
-    public void EnterScoreState()
+
+    public void EnterDrawState()
     {
-        currentState = TurnState.TurnEndState;
-    
+        if(P1_isStanding && P1_Turn)//if it is P1's turn and they are standing 
+        {
+            currentTurnState = TurnState.StandingState;
+            ShowScreen(PlayerStandingScreen);
+            Player1Screen.SetActive(true);
+        }
+        else if(P2_isStanding && !P1_Turn)//if it is P2's turn an they are standing
+        {
+            currentTurnState = TurnState.StandingState;
+            ShowScreen(PlayerStandingScreen);
+            Player2Screen.SetActive(true);
+        }
+        else if(P1_isBusted && P1_Turn)//if it is P1's turn and they are busted
+        {
+            currentTurnState = TurnState.BustedState;
+            ShowScreen(PlayerBustedScreen);
+            Player1Screen.SetActive(true);
+        }
+        else if(P2_isBusted && !P1_Turn)//if it is P2's turn and they are busted 
+        {
+            currentTurnState = TurnState.BustedState;
+            ShowScreen(PlayerBustedScreen);
+            Player2Screen.SetActive(true);
+        }
+        else if(!P1_isStanding && !P2_isBusted && P1_Turn)// if it is P1's turn and they are NOT busted or standing 
+        {
+            currentTurnState = TurnState.DrawState;
+            Player1Screen.SetActive(true);
+        }
+        else if(!P2_isStanding && !P2_isBusted && !P1_Turn)//if i
+        {
+            currentTurnState = TurnState.DrawState;
+            Player2Screen.SetActive(true);
+        }
     }
-    public void EnterNextPlayersTurn()
+
+    public void EnterStandingState()
     {
-        if (p1Turn)
+        if(P1_Turn && !P1_isStanding)//if it is P1's turn and they decide to stand
         {
-            p1Turn = false;
+            P1_isStanding = true;
         }
-        else if (!p1Turn)
+        else if(!P1_Turn && !P2_isStanding)//if it is P2's turn and they decide to stand
         {
-            p1Turn = true;
+            P2_isStanding = true;
         }
-        currentState = TurnState.StartState;
     }
-    
+
+    public void EnterEndState()
+    {
+        currentTurnState = TurnState.EndState;
+    }
+
+    public void EndTurn()
+    {
+        if(P1_Turn)//if it was P1's turn, it is now P2's turn
+        {
+            P1_Turn = false;
+        }
+        else if(!P1_Turn)// if it was P2's turn, it is now P1's turn
+        {
+            P1_Turn = true;
+        }
+        EnterStartState();
+       
+    }
+
+
 }
