@@ -40,21 +40,11 @@ public class CardManager : MonoBehaviour
         {
             Card_Asset = P2_Area.GetComponent<P2_PlayArea>().P2Area[0];
         }
-        /*Card_Asset = deck.cards[1];*/
+       
         Card_Value = Card_Asset.CardValue; 
 
         ReadCardFromAsset();
-        /*if (Card_Asset != null)
-        {
-            ReadCardFromAsset();
-        }*/
-    }
-    public void Update()
-    {
-        //Card_Asset = deck.cards[0];
-        //Card_Value = Card_Asset.CardValue;
-
-
+        
     }
     public void ReadCardFromAsset()
     {

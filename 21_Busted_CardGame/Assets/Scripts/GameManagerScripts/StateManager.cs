@@ -22,19 +22,26 @@ public class StateManager : MonoBehaviour
     public InputField p2Name;
     public string Player1Name;
     public string Player2Name;
+    public Text P1_Name;
+    public Text P2_Name;
 
     // Start is called before the first frame update
     void Start()
     {
         currentGameState = GameState.TitleState;
         ShowScreen(Title);
+        Player1Name = "Player 1";
+        Player2Name = "Player 2";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Updates the player Canvases
+        P1_Name.text = Player1Name;
+        P2_Name.text = Player2Name;
     }
+    //Controller for showing the screens
     private void ShowScreen(GameObject gameObjectToShow)
     {
         Title.SetActive(false);
@@ -45,6 +52,8 @@ public class StateManager : MonoBehaviour
 
         gameObjectToShow.SetActive(true);
     }
+
+    //Nameing of Players, Standard names if no input 
     public void SetP1Name()
     {
         Player1Name = p1Name.text;
@@ -53,6 +62,7 @@ public class StateManager : MonoBehaviour
     {
         Player2Name = p2Name.text;
     }
+    //When the game is actually played
     public void GamePlay()
     {
         GameStart = true;
@@ -60,11 +70,13 @@ public class StateManager : MonoBehaviour
         ShowScreen(PlayGame);
         background.SetActive(true);
     }
+    //when the game is paused
     public void PauseGame()
     {
         currentGameState = GameState.PauseState;
         ShowScreen(Pause);
     }
+    //when the game has ended
     public void EndGame()
     {
         currentGameState = GameState.EndGameState;

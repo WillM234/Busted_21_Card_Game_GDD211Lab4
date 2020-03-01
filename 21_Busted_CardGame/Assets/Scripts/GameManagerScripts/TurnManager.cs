@@ -45,7 +45,7 @@ public class TurnManager : MonoBehaviour
 
         gameObjectToShow.SetActive(true);
     }
-
+    //Start of Player Turn
     public void EnterStartState()
     {
         currentTurnState = TurnState.StartState;
@@ -58,7 +58,7 @@ public class TurnManager : MonoBehaviour
             ShowScreen(Player2Screen);
         }
     }
-
+    //determines which state depending on thier actions of last turn 
     public void EnterDrawState()
     {
         if(P1_isStanding && P1_Turn)//if it is P1's turn and they are standing 
@@ -96,7 +96,7 @@ public class TurnManager : MonoBehaviour
             Player2Screen.SetActive(true);
         }
     }
-
+    //enters only if Player is_Standing is true at the begining of their turn
     public void EnterStandingState()
     {
         if(P1_Turn && !P1_isStanding)//if it is P1's turn and they decide to stand
@@ -108,12 +108,12 @@ public class TurnManager : MonoBehaviour
             P2_isStanding = true;
         }
     }
-
+    //not sure if i really need EndState
     public void EnterEndState()
     {
         currentTurnState = TurnState.EndState;
     }
-
+    //happens on Button press and starts next players turn if it can happen 
     public void EndTurn()
     {
         if(P1_Turn)//if it was P1's turn, it is now P2's turn
