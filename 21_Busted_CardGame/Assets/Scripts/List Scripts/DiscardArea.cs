@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiscardArea : MonoBehaviour
 {
-    public List<GameObject> Discarded = new List<GameObject>();
+    public List<CardAsset> Discarded = new List<CardAsset>();
     private void Start()
     {
         

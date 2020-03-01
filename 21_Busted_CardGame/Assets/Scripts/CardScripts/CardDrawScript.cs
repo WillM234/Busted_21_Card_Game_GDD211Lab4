@@ -8,6 +8,7 @@ public class CardDrawScript : MonoBehaviour
     public Deck deck;
     public P1_PlayArea P1_Area;
     public P2_PlayArea P2_Area;
+    public DiscardArea Discard;
     public TurnManager TurnMaster;
     
 
@@ -43,16 +44,18 @@ public class CardDrawScript : MonoBehaviour
     }
     public void DrawACard()
     {
-         NCard = PlayerDeck.GetComponent<Deck>().cards[0]/*new CardAsset(deck.cards[0])*/;
+         NCard = PlayerDeck.GetComponent<Deck>().cards[0];
         if (deck.cards.Count > 0)
         {
             if(TurnMaster.P1_Turn == true)
             {
+                Discard.Discarded.Insert(0, NCard);
                 P1_Area.P1Area.Insert(0, NCard);
                 deck.cards.RemoveAt(0);
             }
             if(TurnMaster.P1_Turn == false)
             {
+                Discard.Discarded.Insert(0, NCard);
                 P2_Area.P2Area.Insert(0, NCard);
                 deck.cards.RemoveAt(0);
             }

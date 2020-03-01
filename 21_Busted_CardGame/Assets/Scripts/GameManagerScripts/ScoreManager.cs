@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [Header("Score Tracking")]
     public int P1_Total;
     public int P2_Total;
-    private int GoalScore = 21;
+    public int GoalScore = 21;
     public int CardPlayedValue;
     [Header("Text References")]
     public Text P1_TotalText;
