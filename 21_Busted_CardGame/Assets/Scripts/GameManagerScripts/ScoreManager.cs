@@ -19,8 +19,8 @@ public class ScoreManager : MonoBehaviour
     private StateManager GameMaster;
     private CardAsset Card_Asset;
     [Header("GameObjects")]
-    private GameObject P1_PArea;
-    private GameObject P2_PArea;
+    public GameObject P1_PArea;
+    public GameObject P2_PArea;
 
 
     private void Awake()
@@ -29,11 +29,23 @@ public class ScoreManager : MonoBehaviour
         GameMaster = GameObject.Find("GameManager").GetComponent<StateManager>();
         P1_PArea = GameObject.Find("Player1Cards");
         P2_PArea = GameObject.Find("Player2Cards");
+        
     }
-
+    private void Start()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
+        /*if(TurnMaster.P1_Turn == true)
+        {
+            Card_Asset = P1_PArea.GetComponent<P1_PlayArea>().P1Area[0];
+        }
+        if(TurnMaster.P1_Turn == false)
+        {
+            Card_Asset = P2_PArea.GetComponent<P2_PlayArea>().P2Area[0];
+        }*/
         if(P1_Total > GoalScore)
         {
             TurnMaster.P1_isBusted = true;
@@ -56,7 +68,7 @@ public class ScoreManager : MonoBehaviour
             CardPlayedValue = Card_Asset.CardValue;
             P1_Total += CardPlayedValue;
         }
-        if (TurnMaster.P1_Turn == false)
+        else if (TurnMaster.P1_Turn == false)
         {
             Card_Asset = P2_PArea.GetComponent<P2_PlayArea>().P2Area[0];
             CardPlayedValue = Card_Asset.CardValue;

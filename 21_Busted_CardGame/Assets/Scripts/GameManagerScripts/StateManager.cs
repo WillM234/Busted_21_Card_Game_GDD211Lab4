@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
-    public enum GameState { TitleState, PlayState, PauseState, EndGameState };
+    public enum GameState { TitleState, PlayState, PauseState};
     public GameState currentGameState;
 
     public bool GameStart = false;
@@ -14,7 +14,6 @@ public class StateManager : MonoBehaviour
     public GameObject Title;
     public GameObject PlayGame;
     public GameObject Pause;
-    public GameObject End;
     public GameObject background;
 
     [Header("Player Name Fields")]
@@ -47,7 +46,6 @@ public class StateManager : MonoBehaviour
         Title.SetActive(false);
         PlayGame.SetActive(false);
         Pause.SetActive(false);
-        End.SetActive(false);
         background.SetActive(false);
 
         gameObjectToShow.SetActive(true);
@@ -76,11 +74,4 @@ public class StateManager : MonoBehaviour
         currentGameState = GameState.PauseState;
         ShowScreen(Pause);
     }
-    //when the game has ended
-    public void EndGame()
-    {
-        currentGameState = GameState.EndGameState;
-        ShowScreen(End);
-    }
-
 }

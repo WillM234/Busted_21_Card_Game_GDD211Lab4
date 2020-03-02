@@ -48,14 +48,17 @@ public class TurnManager : MonoBehaviour
     //Start of Player Turn
     public void EnterStartState()
     {
+        
         currentTurnState = TurnState.StartState;
         if(P1_Turn)
-        {
+        {   
             ShowScreen(Player1Screen);
+            TurnStartScreen.SetActive(true);
         }
         else if(!P1_Turn)
         {
             ShowScreen(Player2Screen);
+            TurnStartScreen.SetActive(true);
         }
     }
     //determines which state depending on thier actions of last turn 

@@ -21,7 +21,10 @@ public class RoundManager : MonoBehaviour
     public bool P1_isRoundWinner;
     public bool P2_isRoundWinner;
     public bool RoundisDraw;
-
+    public bool P1_WinsGame;
+    public bool P2_WinsGame;
+    public bool GameisDraw;
+    public bool GameIsFinished;
 
     [Header("Ints")]
     public int RoundCount = 1;
@@ -31,7 +34,10 @@ public class RoundManager : MonoBehaviour
     public int MaxRounds;
     private int GoalScore;
 
-    public bool GameIsFinished;
+    
+
+    public GameObject RoundisDonePanel;
+    public GameObject GameisDonePanel;
 
     [Header("Texts")]
     public Text RoundCounter;
@@ -40,6 +46,8 @@ public class RoundManager : MonoBehaviour
     public Text RoundDrawsText;
     public Text DiscardText;
     public Text DeckText;
+    public Text ShowRoundWinner;
+    public Text ShowGameWinner;
     
 
     private void Awake()
@@ -115,6 +123,38 @@ public class RoundManager : MonoBehaviour
                 P1_isRoundWinner = true;
             }//if only player 2 is busted
         }
+        //setting round counts so they dont go over the max
+        if(RoundisOver == true && RoundCount >= MaxRounds)
+        {
+            GameIsFinished = true;
+        }
+       /* if(RoundCount > MaxRounds)
+        {
+            RoundCount = MaxRounds;
+        }*/
+        //determining who won the game at the end of the game
+        if(GameIsFinished == true)
+        {
+            if(P1_RoundWins > P2_RoundWins)
+            {
+                P1_WinsGame = true;
+            }
+            else if(P2_RoundWins > P1_RoundWins)
+            {
+                P2_WinsGame = true;
+            }
+            else if(P1_RoundWins == P2_RoundWins)
+            {
+                GameisDraw = true;
+            }
+            else
+            {
+                P1_WinsGame = false;
+                P2_WinsGame = false;
+                GameisDraw = false;
+            }
+        }
+
 
         //updating Texts so that player can see the results of the round
         DeckText.text = (deck.cards.Count + "");
@@ -145,6 +185,10 @@ public class RoundManager : MonoBehaviour
             DiscardText.text = (Discard.Discarded.Count + "");
             //add to Round Count
             RoundCount += 1;
+            //reseting the win bools
+            P1_isRoundWinner = false;
+            P2_isRoundWinner = false;
+            RoundisDraw = false;
             //Score Resets
             ScoreMaster.P1_Total = 0;
             ScoreMaster.P2_Total = 0;
@@ -177,5 +221,44 @@ public class RoundManager : MonoBehaviour
     {
         MaxRounds = 7;
     }
-
+    public void ShowRoundWinScreen()
+    {
+        if (RoundisOver == true && GameIsFinished == false)
+        {
+            RoundisDonePanel.SetActive(true);
+            if(P1_isRoundWinner == true)
+            {
+                ShowRoundWinner.text = (GameMaster.Player1Name + " wins this round! Continue on the next round!");
+            }
+            else if (P2_isRoundWinner == true)
+            {
+                ShowRoundWinner.text = (GameMaster.Player2Name + " wins this round! Continue onto the next round!");
+            }
+            else if (RoundisDraw == true)
+            {
+                ShowRoundWinner.text = "The round tied! Continue onto the next round!";
+            }
+        }
+        else if (GameIsFinished == true && RoundisOver == true)
+        {
+            GameisDonePanel.SetActive(true);
+            if (P1_WinsGame == true)
+            {
+                ShowGameWinner.text = (GameMaster.Player1Name + " wins the game! Hit the Reload button to play again!");
+            }
+            else if (P2_WinsGame == true)
+            {
+                ShowGameWinner.text = (GameMaster.Player2Name + " wins the game! Hit the Reload button to play again!");
+            }
+            else if (GameisDraw == true)
+            {
+                ShowGameWinner.text = "The game ended in a draw! Hit the reload button to play again!";
+            }
+        }
+       else if(RoundisOver == false && GameIsFinished == false)
+        {
+            TurnMaster.EndTurn();
+        }
+    }
+    
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 574723750}
   - component: {fileID: 574723749}
   - component: {fileID: 574723748}
+  - component: {fileID: 352945245}
   m_Layer: 0
   m_Name: DrawCardButton
   m_TagString: Untagged
@@ -120,8 +121,31 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 352945245}
+        m_MethodName: DrawACard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 352945245}
+        m_MethodName: CardSpawn
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4568701743683121459, guid: e0c5f00ce4a634fd6a2f443e460aa423,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 0}
-        m_MethodName: 
+        m_MethodName: AddToTotal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -133,6 +157,28 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &352945245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574723746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65351aeed21fe499f8e48e46ef3e7ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deck: {fileID: 4311194279773624480}
+  P1_Area: {fileID: 0}
+  P2_Area: {fileID: 0}
+  Discard: {fileID: 0}
+  TurnMaster: {fileID: 0}
+  P1Slot: {fileID: 0}
+  P2Slot: {fileID: 0}
+  NumCard: {fileID: 4568701743683121459, guid: e0c5f00ce4a634fd6a2f443e460aa423, type: 3}
+  NCard: {fileID: 0}
+  PlayPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1410768192
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +372,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 15}
+  m_SizeDelta: {x: 80, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1596767685720932703
 Canvas:
@@ -477,6 +523,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c53c808f2168c478e8757ff5c7a7e080, type: 2}
   - {fileID: 11400000, guid: c53c808f2168c478e8757ff5c7a7e080, type: 2}
   - {fileID: 11400000, guid: c53c808f2168c478e8757ff5c7a7e080, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
+  - {fileID: 11400000, guid: ec7191226ecea46f983959879976818d, type: 2}
 --- !u!1 &1596767687032026678
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,15 +717,15 @@ RectTransform:
   m_GameObject: {fileID: 7714780477258257259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25660014, y: 0.25660014, z: 0.25660014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1596767687422698656}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0}
-  m_SizeDelta: {x: 25, y: 45}
+  m_AnchorMin: {x: 0.052, y: 0.053895123}
+  m_AnchorMax: {x: 0.936451, y: 0.9461049}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6229761617578073345
 CanvasRenderer:
@@ -702,8 +756,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 3949c7c9bdae74b60b2830890c5f1396, type: 3}
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
