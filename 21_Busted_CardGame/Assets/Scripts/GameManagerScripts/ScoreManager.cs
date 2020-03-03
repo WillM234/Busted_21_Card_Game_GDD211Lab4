@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject P2_PArea;
 
 
+
     private void Awake()
     {
         TurnMaster = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -38,14 +39,15 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if(TurnMaster.P1_Turn == true)
+
+        if(P1_Total == GoalScore)
         {
-            Card_Asset = P1_PArea.GetComponent<P1_PlayArea>().P1Area[0];
+            TurnMaster.P1_isStanding = true;
         }
-        if(TurnMaster.P1_Turn == false)
+        if(P2_Total == GoalScore)
         {
-            Card_Asset = P2_PArea.GetComponent<P2_PlayArea>().P2Area[0];
-        }*/
+            TurnMaster.P2_isStanding = true;
+        }
         if(P1_Total > GoalScore)
         {
             TurnMaster.P1_isBusted = true;

@@ -223,7 +223,7 @@ public class RoundManager : MonoBehaviour
     }
     public void ShowRoundWinScreen()
     {
-        if (RoundisOver == true && GameIsFinished == false)
+        if (RoundisOver == true)
         {
             RoundisDonePanel.SetActive(true);
             if(P1_isRoundWinner == true)
@@ -239,7 +239,14 @@ public class RoundManager : MonoBehaviour
                 ShowRoundWinner.text = "The round tied! Continue onto the next round!";
             }
         }
-        else if (GameIsFinished == true && RoundisOver == true)
+       else if(RoundisOver == false && GameIsFinished == false)
+        {
+            TurnMaster.EndTurn();
+        }
+    }
+    public void ShowGameWinScreen()
+    {
+        if (GameIsFinished == true && RoundisOver == true)
         {
             GameisDonePanel.SetActive(true);
             if (P1_WinsGame == true)
@@ -255,7 +262,7 @@ public class RoundManager : MonoBehaviour
                 ShowGameWinner.text = "The game ended in a draw! Hit the reload button to play again!";
             }
         }
-       else if(RoundisOver == false && GameIsFinished == false)
+        else if (RoundisOver == false && GameIsFinished == false)
         {
             TurnMaster.EndTurn();
         }
